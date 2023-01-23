@@ -5536,6 +5536,11 @@ parameters:
 			path: app/code/core/Mage/Rating/Model/Resource/Rating/Collection.php
 
 		-
+			message: "#^Variable \\$storeId on left side of \\?\\? always exists and is not nullable\\.$#"
+			count: 1
+			path: app/code/core/Mage/Rating/Model/Resource/Rating/Collection.php
+
+		-
 			message: "#^Method Mage_Rating_Model_Resource_Rating_Entity\\:\\:getIdByCode\\(\\) should return int but returns string\\|false\\|null\\.$#"
 			count: 1
 			path: app/code/core/Mage/Rating/Model/Resource/Rating/Entity.php
@@ -7701,7 +7706,7 @@ parameters:
 			path: lib/Varien/Object/Cache.php
 
 		-
-			message: "#^Offset 'function' on array\\{function\\: string, line\\?\\: int, file\\?\\: string, class\\?\\: class\\-string, type\\?\\: '\\-\\>'\\|'\\:\\:', args\\?\\: array, object\\?\\: object\\} in isset\\(\\) always exists and is not nullable\\.$#"
+			message: "#^Offset 'function' on array\\{function\\: string, line\\?\\: int, file\\?\\: string, class\\?\\: class\\-string, type\\?\\: '\\-\\>'\\|'\\:\\:', args\\?\\: array, object\\?\\: object\\} on left side of \\?\\? always exists and is not nullable\\.$#"
 			count: 1
 			path: lib/Varien/Object/Cache.php
 
