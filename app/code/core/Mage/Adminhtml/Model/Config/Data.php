@@ -146,7 +146,7 @@ class Mage_Adminhtml_Model_Config_Data extends Varien_Object
                 /**
                  * Get field backend model
                  */
-                $backendClass = (isset($fieldConfig->backend_model)) ? $fieldConfig->backend_model : false;
+                $backendClass = $fieldConfig->backend_model ?? false;
                 if (!$backendClass) {
                     $backendClass = 'core/config_data';
                 }

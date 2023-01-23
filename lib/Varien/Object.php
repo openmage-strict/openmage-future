@@ -392,7 +392,7 @@ class Varien_Object implements ArrayAccess
      */
     protected function _getData($key)
     {
-        return isset($this->_data[$key]) ? $this->_data[$key] : null;
+        return $this->_data[$key] ?? null;
     }
 
     /**
@@ -623,14 +623,14 @@ class Varien_Object implements ArrayAccess
             case 'get':
                 //Varien_Profiler::start('GETTER: '.get_class($this).'::'.$method);
                 $key = $this->_underscore(substr($method, 3));
-                $data = $this->getData($key, isset($args[0]) ? $args[0] : null);
+                $data = $this->getData($key, $args[0] ?? null);
                 //Varien_Profiler::stop('GETTER: '.get_class($this).'::'.$method);
                 return $data;
 
             case 'set':
                 //Varien_Profiler::start('SETTER: '.get_class($this).'::'.$method);
                 $key = $this->_underscore(substr($method, 3));
-                $result = $this->setData($key, isset($args[0]) ? $args[0] : null);
+                $result = $this->setData($key, $args[0] ?? null);
                 //Varien_Profiler::stop('SETTER: '.get_class($this).'::'.$method);
                 return $result;
 
@@ -754,7 +754,7 @@ class Varien_Object implements ArrayAccess
         if (is_null($key)) {
             return $this->_origData;
         }
-        return isset($this->_origData[$key]) ? $this->_origData[$key] : null;
+        return $this->_origData[$key] ?? null;
     }
 
     /**
@@ -874,7 +874,7 @@ class Varien_Object implements ArrayAccess
     #[\ReturnTypeWillChange]
     public function offsetGet($offset)
     {
-        return isset($this->_data[$offset]) ? $this->_data[$offset] : null;
+        return $this->_data[$offset] ?? null;
     }
 
     /**

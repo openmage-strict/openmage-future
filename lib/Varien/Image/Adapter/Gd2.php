@@ -131,7 +131,7 @@ class Varien_Image_Adapter_Gd2 extends Varien_Image_Adapter_Abstract
 
     public function save($destination = null, $newName = null)
     {
-        $fileName = (isset($destination)) ? $destination : $this->_fileName;
+        $fileName = $destination ?? $this->_fileName;
 
         if (isset($destination) && isset($newName)) {
             $fileName = $destination . "/" . $newName;
@@ -145,7 +145,7 @@ class Varien_Image_Adapter_Gd2 extends Varien_Image_Adapter_Abstract
             $fileName = $this->_fileSrcPath . $this->_fileSrcName;
         }
 
-        $destinationDir = (isset($destination)) ? $destination : $this->_fileSrcPath;
+        $destinationDir = $destination ?? $this->_fileSrcPath;
 
         if (!is_writable($destinationDir)) {
             try {
