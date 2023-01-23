@@ -288,7 +288,7 @@ class Error_Processor
      */
     protected function _sendHeaders(int $statusCode)
     {
-        $serverProtocol = !empty($_SERVER['SERVER_PROTOCOL']) ? $_SERVER['SERVER_PROTOCOL'] : 'HTTP/1.0';
+        $serverProtocol = empty($_SERVER['SERVER_PROTOCOL']) ? 'HTTP/1.0' : $_SERVER['SERVER_PROTOCOL'];
         switch ($statusCode) {
             case 404:
                 $description = 'Not Found';
