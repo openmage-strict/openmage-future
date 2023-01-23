@@ -397,7 +397,7 @@ class Mage_Rule_Model_Condition_Combine extends Mage_Rule_Model_Condition_Abstra
      */
     public function getConditions()
     {
-        $key = $this->getPrefix() ? $this->getPrefix() : 'conditions';
+        $key = $this->getPrefix() ?: 'conditions';
         return $this->getData($key);
     }
 
@@ -409,7 +409,7 @@ class Mage_Rule_Model_Condition_Combine extends Mage_Rule_Model_Condition_Abstra
      */
     public function setConditions($conditions)
     {
-        $key = $this->getPrefix() ? $this->getPrefix() : 'conditions';
+        $key = $this->getPrefix() ?: 'conditions';
         return $this->setData($key, $conditions);
     }
 

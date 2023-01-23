@@ -187,7 +187,7 @@ class Mage_Paypal_Model_Hostedpro_Request extends Varien_Object
             'first_name' => $address->getFirstname(),
             'last_name' => $address->getLastname(),
             'city'      => $address->getCity(),
-            'state'     => $address->getRegionCode() ? $address->getRegionCode() : $address->getCity(),
+            'state'     => $address->getRegionCode() ?: $address->getCity(),
             'zip'       => $address->getPostcode(),
             'country'   => $address->getCountry(),
         ];
@@ -214,7 +214,7 @@ class Mage_Paypal_Model_Hostedpro_Request extends Varien_Object
             'billing_first_name' => $address->getFirstname(),
             'billing_last_name' => $address->getLastname(),
             'billing_city'      => $address->getCity(),
-            'billing_state'     => $address->getRegionCode() ? $address->getRegionCode() : $address->getCity(),
+            'billing_state'     => $address->getRegionCode() ?: $address->getCity(),
             'billing_zip'       => $address->getPostcode(),
             'billing_country'   => $address->getCountry(),
         ];

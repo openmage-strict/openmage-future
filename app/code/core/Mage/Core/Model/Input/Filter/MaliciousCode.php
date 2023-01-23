@@ -64,7 +64,7 @@ class Mage_Core_Model_Input_Filter_MaliciousCode implements Zend_Filter_Interfac
     {
         $result = false;
         do {
-            $subject = $result ? $result : $value;
+            $subject = $result ?: $value;
             $result = preg_replace($this->_expressions, '', $subject, -1, $count);
         } while ($count !== 0);
 

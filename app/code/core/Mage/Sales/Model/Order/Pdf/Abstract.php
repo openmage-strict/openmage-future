@@ -145,7 +145,7 @@ abstract class Mage_Sales_Model_Order_Pdf_Abstract extends Varien_Object
      */
     protected function insertLogo(&$page, $store = null)
     {
-        $this->y = $this->y ? $this->y : 815;
+        $this->y = $this->y ?: 815;
         $image = Mage::getStoreConfig('sales/identity/logo', $store);
         if ($image) {
             $image = Mage::getBaseDir('media') . '/sales/store/logo/' . $image;
@@ -194,7 +194,7 @@ abstract class Mage_Sales_Model_Order_Pdf_Abstract extends Varien_Object
         $page->setFillColor(new Zend_Pdf_Color_GrayScale(0));
         $font = $this->_setFontRegular($page, 10);
         $page->setLineWidth(0);
-        $this->y = $this->y ? $this->y : 815;
+        $this->y = $this->y ?: 815;
         $top = 815;
         foreach (explode("\n", Mage::getStoreConfig('sales/identity/address', $store)) as $value) {
             if ($value !== '') {
@@ -273,7 +273,7 @@ abstract class Mage_Sales_Model_Order_Pdf_Abstract extends Varien_Object
             $order = $shipment->getOrder();
         }
 
-        $this->y = $this->y ? $this->y : 815;
+        $this->y = $this->y ?: 815;
         $top = $this->y;
 
         $page->setFillColor(new Zend_Pdf_Color_GrayScale(0.45));

@@ -251,7 +251,7 @@ class Mage_Catalog_Model_Product_Type_Price
             }
         }
 
-        return ($prices) ? $prices : [];
+        return $prices ?: [];
     }
 
     /**

@@ -506,7 +506,7 @@ class Mage_Catalog_Model_Category extends Mage_Catalog_Model_Abstract
     public function getCategoryIdUrl()
     {
         Varien_Profiler::start('REGULAR: ' . __METHOD__);
-        $urlKey = $this->getUrlKey() ? $this->getUrlKey() : $this->formatUrlKey($this->getName());
+        $urlKey = $this->getUrlKey() ?: $this->formatUrlKey($this->getName());
         $url = $this->getUrlInstance()->getUrl('catalog/category/view', [
             's' => $urlKey,
             'id' => $this->getId(),

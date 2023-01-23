@@ -286,7 +286,7 @@ class Mage_Authorizenet_Model_Directpost extends Mage_Paygate_Model_Authorizenet
     public function getCgiUrl()
     {
         $uri = $this->getConfigData('cgi_url');
-        return $uri ? $uri : self::CGI_URL;
+        return $uri ?: self::CGI_URL;
     }
 
     /**
@@ -565,7 +565,7 @@ class Mage_Authorizenet_Model_Directpost extends Mage_Paygate_Model_Authorizenet
             $orderStatus = $order->getConfig()->getStateDefaultStatus($orderState);
         }
 
-        $order->setState($orderState, $orderStatus ? $orderStatus : true, $message, false)
+        $order->setState($orderState, $orderStatus ?: true, $message, false)
             ->save();
 
         //match amounts. should be equals for authorization.

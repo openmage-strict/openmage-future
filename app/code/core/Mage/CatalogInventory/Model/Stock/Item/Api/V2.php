@@ -40,7 +40,7 @@ class Mage_CatalogInventory_Model_Stock_Item_Api_V2 extends Mage_CatalogInventor
         /** @var Mage_Catalog_Model_Product $product */
         $product = Mage::getModel('catalog/product');
         $idBySku = $product->getIdBySku($productId);
-        $productId = $idBySku ? $idBySku : $productId;
+        $productId = $idBySku ?: $productId;
 
         $product->setStoreId($this->_getStoreId())
             ->load($productId);

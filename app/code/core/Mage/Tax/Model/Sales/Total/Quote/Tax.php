@@ -1402,7 +1402,7 @@ class Mage_Tax_Model_Sales_Total_Quote_Tax extends Mage_Sales_Model_Quote_Addres
     protected function _calculateRowWeeeTax($discountAmount, $item, $rate, $base = true)
     {
         //We want to update the weee tax for the unit too. discount amount set on the item is by row
-        $discountAmountByUnit = $discountAmount / ($item->getTotalQty() ? $item->getTotalQty() : 1);
+        $discountAmountByUnit = $discountAmount / ($item->getTotalQty() ?: 1);
         $this->_calculateWeeeTax($discountAmountByUnit, $item, $rate, $base);
 
         $totalWeeeAmountInclTax = 0;
@@ -1470,7 +1470,7 @@ class Mage_Tax_Model_Sales_Total_Quote_Tax extends Mage_Sales_Model_Quote_Addres
                 return $this->_calculator->calcTaxAmount($weeeAmountIncludingTax - $discountAmount, $rate, true, true);
             }
         }
-        $discountAmount = $discountAmount ? $discountAmount : 0;
+        $discountAmount = $discountAmount ?: 0;
 
         ///Regular case where weee does not have the tax and we want to calculate the tax
         return $this->_calculator->calcTaxAmount($weeeAmountExclTax - $discountAmount, $rate, false, true);
@@ -1549,8 +1549,8 @@ class Mage_Tax_Model_Sales_Total_Quote_Tax extends Mage_Sales_Model_Quote_Addres
             }
 
             if (!is_null($row['percent'])) {
-                $row['percent'] = $row['percent'] ? $row['percent'] : 1;
-                $rate = $rate ? $rate : 1;
+                $row['percent'] = $row['percent'] ?: 1;
+                $rate = $rate ?: 1;
 
                 $appliedAmount = $amount / $rate * $row['percent'];
                 $baseAppliedAmount = $baseAmount / $rate * $row['percent'];
@@ -1609,7 +1609,7 @@ class Mage_Tax_Model_Sales_Total_Quote_Tax extends Mage_Sales_Model_Quote_Addres
             $address->addTotal([
                 'code' => $this->getCode(),
                 'title' => Mage::helper('tax')->__('Tax'),
-                'full_info' => $applied ? $applied : [],
+                'full_info' => $applied ?: [],
                 'value' => $amount,
                 'area' => $area
             ]);

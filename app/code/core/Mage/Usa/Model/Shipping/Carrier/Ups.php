@@ -811,7 +811,7 @@ class Mage_Usa_Model_Shipping_Carrier_Ups extends Mage_Usa_Model_Shipping_Carrie
             $serviceCode = null; // Service code is not relevant when we're asking ALL possible services' rates
         } else {
             $params['10_action'] = 'Rate';
-            $serviceCode = $r->getProduct() ? $r->getProduct() : '';
+            $serviceCode = $r->getProduct() ?: '';
         }
         $serviceDescription = $serviceCode ? $this->getShipmentByCode($serviceCode) : '';
 
@@ -1408,9 +1408,7 @@ XMLAuth;
 
         $shipToPart = $shipmentPart->addChild('ShipTo');
         $shipToPart->addChild('AttentionName', $request->getRecipientContactPersonName());
-        $shipToPart->addChild('CompanyName', $request->getRecipientContactCompanyName()
-            ? $request->getRecipientContactCompanyName()
-            : 'N/A');
+        $shipToPart->addChild('CompanyName', $request->getRecipientContactCompanyName() ?: 'N/A');
         $shipToPart->addChild('PhoneNumber', $request->getRecipientContactPhoneNumber());
 
         $addressPart = $shipToPart->addChild('Address');
@@ -1429,9 +1427,7 @@ XMLAuth;
         if ($request->getIsReturn()) {
             $shipFromPart = $shipmentPart->addChild('ShipFrom');
             $shipFromPart->addChild('AttentionName', $request->getShipperContactPersonName());
-            $shipFromPart->addChild('CompanyName', $request->getShipperContactCompanyName()
-                ? $request->getShipperContactCompanyName()
-                : $request->getShipperContactPersonName());
+            $shipFromPart->addChild('CompanyName', $request->getShipperContactCompanyName() ?: $request->getShipperContactPersonName());
             $shipFromAddress = $shipFromPart->addChild('Address');
             $shipFromAddress->addChild('AddressLine1', $request->getShipperAddressStreet1());
             $shipFromAddress->addChild('AddressLine2', $request->getShipperAddressStreet2());

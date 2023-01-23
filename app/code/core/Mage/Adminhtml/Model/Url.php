@@ -84,9 +84,9 @@ class Mage_Adminhtml_Model_Url extends Mage_Core_Model_Url
             return $result;
         }
 
-        $_route = $this->getRouteName() ? $this->getRouteName() : '*';
-        $_controller = $this->getControllerName() ? $this->getControllerName() : $this->getDefaultControllerName();
-        $_action = $this->getActionName() ? $this->getActionName() : $this->getDefaultActionName();
+        $_route = $this->getRouteName() ?: '*';
+        $_controller = $this->getControllerName() ?: $this->getDefaultControllerName();
+        $_action = $this->getActionName() ?: $this->getDefaultActionName();
 
         if ($cacheSecretKey) {
             $secret = [self::SECRET_KEY_PARAM_NAME => "\${$_controller}/{$_action}\$"];

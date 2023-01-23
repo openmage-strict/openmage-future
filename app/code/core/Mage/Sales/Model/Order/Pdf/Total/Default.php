@@ -61,7 +61,7 @@ class Mage_Sales_Model_Order_Pdf_Total_Default extends Varien_Object
             $label = $title . ':';
         }
 
-        $fontSize = $this->getFontSize() ? $this->getFontSize() : 7;
+        $fontSize = $this->getFontSize() ?: 7;
         $total = [
             'amount'    => $amount,
             'label'     => $label,
@@ -91,7 +91,7 @@ class Mage_Sales_Model_Order_Pdf_Total_Default extends Varien_Object
      */
     public function getFullTaxInfo()
     {
-        $fontSize       = $this->getFontSize() ? $this->getFontSize() : 7;
+        $fontSize       = $this->getFontSize() ?: 7;
         $taxClassAmount = $this->_getCalculatedTaxes();
         $shippingTax    = $this->_getShippingTax();
         $taxClassAmount = array_merge($taxClassAmount, $shippingTax);
