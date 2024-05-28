@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace OpenMage\Tests\Unit\Core\Helper;
+namespace OpenMage\Tests\Unit\Mage\Core\Helper;
 
 use Mage_Core_Helper_EnvironmentConfigLoader;
 
