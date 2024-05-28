@@ -34,7 +34,7 @@ class FileTest extends TestCase
     }
 
     /**
-     * @return string[][]
+     * @return array<string, array<int, string|null>>
      */
     public function provideGetFilePathData(): array
     {

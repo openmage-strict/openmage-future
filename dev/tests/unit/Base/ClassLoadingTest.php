@@ -19,7 +19,7 @@ class ClassLoadingTest extends TestCase
     }
 
     /**
-     * @return string[][]
+     * @return array<string, array<int, bool|string>>
      */
     public function provideClassExistsData(): array
     {

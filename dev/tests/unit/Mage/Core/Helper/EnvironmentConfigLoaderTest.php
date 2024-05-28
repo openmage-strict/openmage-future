@@ -3,64 +3,57 @@ declare(strict_types=1);
 
 namespace OpenMage\Tests\Unit\Core\Helper;
 
+use Mage;
+use Mage_Core_Exception;
 use PHPUnit\Framework\TestCase;
 use Mage_Core_Helper_EnvironmentConfigLoader;
-use Mage_Core_Model_Config;
-
-class TestEnvLoaderHelper extends Mage_Core_Helper_EnvironmentConfigLoader {
-    public function exposedBuildPath(string $section, string $group, string $field): string
-    {
-        return $this->buildPath($section, $group, $field);
-    }
-
-    public function exposedBuildNodePath(string $scope, string $path): string
-    {
-        return $this->buildNodePath($scope, $path);
-    }
-}
+use Varien_Simplexml_Config;
 
 class EnvironmentConfigLoaderTest extends TestCase
 {
+    /**
+     * @throws Mage_Core_Exception
+     */
     public function setup(): void
     {
-        \Mage::setRoot('');
+        Mage::setRoot();
     }
 
-    public function testBuildPath()
+    public function testBuildPath(): void
     {
-        $environmentConfigLoaderHelper = new TestEnvLoaderHelper();
+        $environmentConfigLoaderHelper = new EnvironmentConfigLoaderTestHelper();
         $path = $environmentConfigLoaderHelper->exposedBuildPath('GENERAL', 'STORE_INFORMATION', 'NAME');
-        $this->assertEquals('general/store_information/name', $path);
+        self::assertEquals('general/store_information/name', $path);
     }
 
-    public function testBuildNodePath()
+    public function testBuildNodePath(): void
     {
-        $environmentConfigLoaderHelper = new TestEnvLoaderHelper();
+        $environmentConfigLoaderHelper = new EnvironmentConfigLoaderTestHelper();
         $nodePath = $environmentConfigLoaderHelper->exposedBuildNodePath('DEFAULT', 'general/store_information/name');
-        $this->assertEquals('default/general/store_information/name', $nodePath);
+        self::assertEquals('default/general/store_information/name', $nodePath);
     }
 
-    public function test_xml_has_test_strings()
+    public function testXmlHasTestStrings(): void
     {
         $xmlStruct = $this->getTestXml();
-        $xml = new \Varien_Simplexml_Config();
+        $xml = new Varien_Simplexml_Config();
         $xml->loadString($xmlStruct);
-        $this->assertEquals('test_default', (string)$xml->getNode('default/general/store_information/name'));
-        $this->assertEquals('test_website', (string)$xml->getNode('websites/base/general/store_information/name'));
-        $this->assertEquals('test_store', (string)$xml->getNode('stores/german/general/store_information/name'));
+        self::assertEquals('test_default', (string)$xml->getNode('default/general/store_information/name'));
+        self::assertEquals('test_website', (string)$xml->getNode('websites/base/general/store_information/name'));
+        self::assertEquals('test_store', (string)$xml->getNode('stores/german/general/store_information/name'));
     }
 
     /**
-     * @dataProvider env_overrides_correct_config_keys
-     * @test
+     * @dataProvider envOverridesCorrectConfigKeysDataProvider
+     * @param array<string, string> $config
      */
-    public function env_overrides_for_valid_config_keys(array $config)
+    public function testEnvOverridesForValidConfigKeys(array $config): void
     {
         $xmlStruct = $this->getTestXml();
 
-        $xmlDefault = new \Varien_Simplexml_Config();
+        $xmlDefault = new Varien_Simplexml_Config();
         $xmlDefault->loadString($xmlStruct);
-        $xml = new \Varien_Simplexml_Config();
+        $xml = new Varien_Simplexml_Config();
         $xml->loadString($xmlStruct);
 
         // act
@@ -75,10 +68,13 @@ class EnvironmentConfigLoaderTest extends TestCase
         $valueAfterOverride = $xml->getNode($configPath);
 
         // assert
-        $this->assertNotEquals((string)$defaultValue, (string)$valueAfterOverride, 'Default value was not overridden.');
+        self::assertNotEquals((string)$defaultValue, (string)$valueAfterOverride, 'Default value was not overridden.');
     }
 
-    public function env_overrides_correct_config_keys(): array
+    /**
+     * @return array<array<string, array<string, string>>>
+     */
+    public function envOverridesCorrectConfigKeysDataProvider(): array
     {
         $defaultPath = 'OPENMAGE_CONFIG__DEFAULT__GENERAL__STORE_INFORMATION__NAME';
         $defaultPathWithDash = 'OPENMAGE_CONFIG__DEFAULT__GENERAL__FOO-BAR__NAME';
@@ -169,16 +165,16 @@ class EnvironmentConfigLoaderTest extends TestCase
     }
 
     /**
-     * @dataProvider env_does_not_override_on_wrong_config_keys
-     * @test
+     * @dataProvider envDoesNotOverrideOnWrongConfigKeysDataProvider
+     * @param array<string, string> $config
      */
-    public function env_does_not_override_for_invalid_config_keys(array $config)
+    public function testEnvDoesNotOverrideForInvalidConfigKeys(array $config): void
     {
         $xmlStruct = $this->getTestXml();
 
-        $xmlDefault = new \Varien_Simplexml_Config();
+        $xmlDefault = new Varien_Simplexml_Config();
         $xmlDefault->loadString($xmlStruct);
-        $xml = new \Varien_Simplexml_Config();
+        $xml = new Varien_Simplexml_Config();
         $xml->loadString($xmlStruct);
 
         $defaultValue = 'test_default';
@@ -195,6 +191,7 @@ class EnvironmentConfigLoaderTest extends TestCase
         ]);
         $loader->overrideEnvironment($xml);
 
+        $valueAfterCheck = '';
         switch ($config['case']) {
             case 'DEFAULT':
                 $valueAfterCheck = $xml->getNode('default/general/store_information/name');
@@ -208,14 +205,18 @@ class EnvironmentConfigLoaderTest extends TestCase
         }
 
         // assert
-        $this->assertTrue(!str_contains('value_will_not_be_changed', (string)$valueAfterCheck), 'Default value was wrongfully overridden.');
+        self::assertTrue(!str_contains('value_will_not_be_changed', (string)$valueAfterCheck), 'Default value was wrongfully overridden.');
     }
 
-    public function env_does_not_override_on_wrong_config_keys(): array
+    /**
+     * @return array<array<string, array<string, string>>>
+     */
+    public function envDoesNotOverrideOnWrongConfigKeysDataProvider(): array
     {
         $defaultPath = 'OPENMAGE_CONFIG__DEFAULT__GENERAL__ST';
         $websitePath = 'OPENMAGE_CONFIG__WEBSITES__BASE__GENERAL__ST';
         $storePath = 'OPENMAGE_CONFIG__STORES__GERMAN__GENERAL__ST';
+
         return [
             [
                 'Case DEFAULT with ' . $defaultPath . ' will not override.' => [

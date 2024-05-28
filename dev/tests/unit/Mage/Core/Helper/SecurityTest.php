@@ -25,6 +25,9 @@ class SecurityTest extends TestCase
         $this->subject = Mage::helper('core/security');
     }
 
+    /**
+     * @return array<int|string, array<int, array<empty, empty>|Mage_Page_Block_Html_Topmenu_Renderer|Mage_Core_Block_Template|string>>
+     */
     public function validateAgainstBlockMethodBlacklistDataProvider(): array
     {
         $topmenu = new Mage_Page_Block_Html_Topmenu_Renderer();
@@ -49,7 +52,7 @@ class SecurityTest extends TestCase
      * @doesNotPerformAssertions if data is correct, then NO exception is thrown, so we don't need an assertion
      * @param Mage_Core_Block_Abstract $block
      * @param string $method
-     * @param array $args
+     * @param string[] $args
      * @return void
      * @throws Mage_Core_Exception
      */
@@ -61,6 +64,9 @@ class SecurityTest extends TestCase
         $this->subject->validateAgainstBlockMethodBlacklist($block, $method, $args);
     }
 
+    /**
+     * @return array<int|string, array<int, array<empty, empty>|Mage_Page_Block_Html_Topmenu_Renderer|Mage_Core_Block_Template|string>>
+     */
     public function forbiddenBlockMethodsDataProvider(): array
     {
         $topmenu = new Mage_Page_Block_Html_Topmenu_Renderer();
@@ -109,7 +115,7 @@ class SecurityTest extends TestCase
      * @dataProvider forbiddenBlockMethodsDataProvider
      * @param Mage_Core_Block_Abstract $block
      * @param string $method
-     * @param array $args
+     * @param string[] $args
      * @return void
      * @throws Mage_Core_Exception
      */
@@ -118,7 +124,7 @@ class SecurityTest extends TestCase
         string $method,
         array $args
     ): void {
-       self::expectExceptionMessage(sprintf('Action with combination block %s and method %s is forbidden.', get_class($block), $method));
-       $this->subject->validateAgainstBlockMethodBlacklist($block, $method, $args);
+        self::expectExceptionMessage(sprintf('Action with combination block %s and method %s is forbidden.', get_class($block), $method));
+        $this->subject->validateAgainstBlockMethodBlacklist($block, $method, $args);
     }
 }
