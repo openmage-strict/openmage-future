@@ -1,12 +1,13 @@
 <?php
+
 declare(strict_types=1);
 
 namespace unit\Varien;
 
+use PHPUnit\Framework\TestCase;
 use stdClass;
 use Varien_Exception;
 use Varien_Object;
-use PHPUnit\Framework\TestCase;
 
 class ObjectTest extends TestCase
 {

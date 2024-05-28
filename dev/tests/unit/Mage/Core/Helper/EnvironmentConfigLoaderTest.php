@@ -1,12 +1,13 @@
 <?php
+
 declare(strict_types=1);
 
 namespace OpenMage\Tests\Unit\Core\Helper;
 
 use Mage;
 use Mage_Core_Exception;
-use PHPUnit\Framework\TestCase;
 use Mage_Core_Helper_EnvironmentConfigLoader;
+use PHPUnit\Framework\TestCase;
 use Varien_Simplexml_Config;
 
 class EnvironmentConfigLoaderTest extends TestCase
