@@ -22,7 +22,9 @@
  * @method $this setCanLoadCalendarJs(bool $value)
  * @method $this setDescription(string $value)
  * @method $this setKeywords(string $value)
+ * @method bool getCanLoadExtJs()
  * @method $this setCanLoadTinyMce(bool $value)
+ * @method bool getCanLoadTinyMce()
  */
 class Mage_Page_Block_Html_Head extends Mage_Core_Block_Template
 {
