@@ -108,7 +108,7 @@ class Mage_CatalogSearch_Model_Resource_Search_Collection extends Mage_Catalog_M
      * Retrieve SQL for search entities
      *
      * @param string $query
-     * @return string
+     * @return Varien_Db_Select
      */
     protected function _getSearchEntityIdsSql($query)
     {
@@ -171,7 +171,7 @@ class Mage_CatalogSearch_Model_Resource_Search_Collection extends Mage_Catalog_M
      * Retrieve SQL for search entities by option
      *
      * @param string $query
-     * @return false|string
+     * @return false|Varien_Db_Select
      */
     protected function _getSearchInOptionSql($query)
     {
