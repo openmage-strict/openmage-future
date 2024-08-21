@@ -21,6 +21,8 @@ return $config
         'constant_case' => true,
         // Equal sign in declare statement should be surrounded by spaces or not following configuration.
         'declare_equal_normalize' => true,
+        // Force strict types declaration in all files. Requires PHP >= 7.0.
+        'declare_strict_types' => true,
         // The keyword `elseif` should be used instead of `else if` so that all control keywords look like single words.
         'elseif' => true,
         // PHP code MUST use only UTF-8 without BOM (remove BOM).
