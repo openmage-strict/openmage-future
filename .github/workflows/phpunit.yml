@@ -90,8 +90,23 @@ jobs:
           --enable_charts 'yes' \
           --skip_url_validation 'yes'
 
+      - name: Restore result cache
+        uses: actions/cache/restore@v4
+        with:
+          path: .phpunit.result.cache
+          key: phpunit-result-cache-${{ matrix.php-versions }}-${{ matrix.mysql-version }}-${{ github.run_id }}
+          restore-keys: |
+            phpunit-result-cache-
+
       - name: Run phpUnit
-        run: php vendor/bin/phpunit --configuration .phpunit.dist.xml
+        run: php vendor/bin/phpunit --configuration .phpunit.dist.xml --testsuite Base,Error,Mage,Varien
+
+      - name: Save result cache
+        uses: actions/cache/save@v4
+        if: always()
+        with:
+          path: .phpunit.result.cache
+          key: phpunit-result-cache-${{ matrix.php-versions }}-${{ matrix.mysql-version }}-${{ github.run_id }}
 
       - name: Publish Unit Test Results
         uses: EnricoMi/publish-unit-test-result-action@v2
@@ -108,5 +123,5 @@ jobs:
           args: >
             -Dproject.settings=tests/sonar-project.properties
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
