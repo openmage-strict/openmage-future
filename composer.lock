@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "0fbe744b086031fb22b730f282c20a9a",
+    "content-hash": "2400dc8eec16671266583aea16897d97",
     "packages": [
         {
             "name": "colinmollenhour/cache-backend-redis",
@@ -2745,16 +2745,16 @@
         },
         {
             "name": "tinymce/tinymce",
-            "version": "7.8.0",
+            "version": "8.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/tinymce/tinymce-dist.git",
-                "reference": "88d1b2874256895338034dba28bf6e920aa4ba17"
+                "reference": "7dcce3851a3c9bec77b73a303c62784a98758d3d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/tinymce/tinymce-dist/zipball/88d1b2874256895338034dba28bf6e920aa4ba17",
-                "reference": "88d1b2874256895338034dba28bf6e920aa4ba17",
+                "url": "https://api.github.com/repos/tinymce/tinymce-dist/zipball/7dcce3851a3c9bec77b73a303c62784a98758d3d",
+                "reference": "7dcce3851a3c9bec77b73a303c62784a98758d3d",
                 "shasum": ""
             },
             "type": "component",
@@ -2798,9 +2798,9 @@
                 "wysiwyg"
             ],
             "support": {
-                "source": "https://github.com/tinymce/tinymce-dist/tree/7.8.0"
+                "source": "https://github.com/tinymce/tinymce-dist/tree/8.2.0"
             },
-            "time": "2025-04-09T02:06:27+00:00"
+            "time": "2025-10-23T01:11:24+00:00"
         }
     ],
     "packages-dev": [
